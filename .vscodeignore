@@ -1,0 +1,8 @@
+.vscode/**
+src/**
+out/**/*.map
+.gitignore
+tsconfig.json
+package-lock.json
+vsc_is_browser-*.vsix
+r-debugger-watcher-*.vsix
