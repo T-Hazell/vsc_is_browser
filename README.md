@@ -1,11 +1,11 @@
 # R Debugger Watcher
 
-A lightweight and performant VSCode extension that helps you keep track of interactive debugger calls in your R code.
+A VSCode extension that helps you keep track of interactive debugger calls in your R code, to prevent interrupting runs of `source()` when you've accidentally left a call to `browser()` in the file.
 
 ## Features
 
 - **Status Bar Indicator:**
-  - Shows a green **"B"** when your R code is clean of interactive debugger calls.
+  - Shows a small green **"B"** when your R code is clean of interactive debugger calls.
   - Changes to an **orange warning** when `browser()` or `options(error = recover)` is detected.
 - **Quick Navigation:** Clicking the status bar warning jumps immediately to the first detected debugger call.
 - **Lightweight:** Only activates when editing R files.
@@ -25,4 +25,4 @@ A lightweight and performant VSCode extension that helps you keep track of inter
 
 ## Credits
 
-This extension was generated with the assistance of the **Gemini CLI**.
+This extension was built with the assistance of the Gemini CLI.
