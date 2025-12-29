@@ -27,15 +27,16 @@ You can customize the appearance of the status bar item when no debuggers are de
 ## Installation
 
 ### Option 1: Build from Source
-1. Clone this repository.
+1. Clone the repository.
 2. Run `npm install` to install dependencies.
 3. Run `npm run compile` to build the extension.
 4. Press `F5` to launch a Debug instance of VSCode with the extension active.
 
 ### Option 2: Install via VSIX
-1. Install `vsce` globally: `npm install -g @vscode/vsce`
-2. Package the extension: `vsce package`
-3. In VSCode, go to Extensions -> "..." -> "Install from VSIX..." and select the generated file.
+1. Clone the repository.
+2. Install `vsce` globally: `npm install -g @vscode/vsce`
+3. Package the extension: `vsce package`
+4. In VSCode, go to Extensions -> "..." -> "Install from VSIX..." and select the generated file.
 
 ## Credits
 
