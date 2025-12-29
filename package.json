@@ -1,0 +1,34 @@
+{
+  "name": "r-debugger-watcher",
+  "displayName": "R Debugger Watcher",
+  "description": "Monitors R files for interactive debugger calls like browser()",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:r"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rDebuggerWatcher.jumpToDebugger",
+        "title": "Jump to Debugger Call"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^16.x",
+    "@types/vscode": "^1.75.0",
+    "typescript": "^4.9.5"
+  }
+}
