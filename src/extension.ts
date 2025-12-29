@@ -32,6 +32,11 @@ export function activate(context: vscode.ExtensionContext) {
             updateStatusBar();
         }
     }));
+    context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(event => {
+        if (event.affectsConfiguration('rDebuggerWatcher')) {
+            updateStatusBar();
+        }
+    }));
 
     // Initial update
     updateStatusBar();
@@ -46,32 +51,49 @@ function updateStatusBar() {
         return;
     }
 
-    const text = editor.document.getText();
     let foundMatch = null;
     firstMatchLine = null;
 
-    // Check for patterns
-    for (const pattern of PATTERNS) {
-        const match = text.match(pattern.regex);
-        if (match && match.index !== undefined) {
-            foundMatch = pattern;
-            firstMatchLine = editor.document.positionAt(match.index).line;
-            break; // Stop at first match found
+    // Check lines for patterns
+    for (let i = 0; i < editor.document.lineCount; i++) {
+        const line = editor.document.lineAt(i);
+        const text = line.text;
+
+        // Skip if line is commented out (starts with optional whitespace and #)
+        if (/^\s*#/.test(text)) {
+            continue;
+        }
+
+        for (const pattern of PATTERNS) {
+            if (pattern.regex.test(text)) {
+                foundMatch = pattern;
+                firstMatchLine = i;
+                break;
+            }
+        }
+        
+        if (foundMatch) {
+            break;
         }
     }
 
     if (foundMatch) {
         // 3. Highlight the type of interactive debugger call
-                                    myStatusBarItem.text = `$(bug) ${foundMatch.label}`;        myStatusBarItem.tooltip = "Click to jump to the debugger call";
+        myStatusBarItem.text = `$(bug) ${foundMatch.label}`;
+        myStatusBarItem.tooltip = "Click to jump to the debugger call";
         myStatusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
         myStatusBarItem.color = undefined; // Reset text color to default (usually white on warning bg)
         myStatusBarItem.command = 'rDebuggerWatcher.jumpToDebugger';
     } else {
-        // 2. Show a small, green B
-        myStatusBarItem.text = "B";
+        // 2. Show the safe state (configurable)
+        const config = vscode.workspace.getConfiguration('rDebuggerWatcher');
+        const safeText = config.get<string>('cleanStateText', 'B');
+        const safeColor = config.get<string>('cleanStateColor', '#55ff55');
+
+        myStatusBarItem.text = safeText;
         myStatusBarItem.tooltip = "No interactive debuggers detected";
         myStatusBarItem.backgroundColor = undefined; // Default background
-        myStatusBarItem.color = '#55ff55'; // Bright Green text
+        myStatusBarItem.color = safeColor;
         myStatusBarItem.command = undefined;
     }
 

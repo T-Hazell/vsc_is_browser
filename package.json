@@ -23,7 +23,22 @@
         "command": "rDebuggerWatcher.jumpToDebugger",
         "title": "Jump to Debugger Call"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "R Debugger Watcher",
+      "properties": {
+        "rDebuggerWatcher.cleanStateText": {
+          "type": "string",
+          "default": "B",
+          "description": "Text or Icon (e.g., $(check)) to show when no debuggers are detected."
+        },
+        "rDebuggerWatcher.cleanStateColor": {
+          "type": "string",
+          "default": "#55ff55",
+          "description": "Color of the status bar item when no debuggers are detected."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

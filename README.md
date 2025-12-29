@@ -4,11 +4,25 @@ A VSCode extension that helps you keep track of interactive debugger calls in yo
 
 ## Features
 
-- **Status Bar Indicator:**
-  - Shows a small green **"B"** when your R code is clean of interactive debugger calls.
-  - Changes to an **orange warning** when `browser()` or `options(error = recover)` is detected.
-- **Quick Navigation:** Clicking the status bar warning jumps immediately to the first detected debugger call.
-- **Lightweight:** Only activates when editing R files.
+- **Real-time Monitoring**: Scans your active R file for `browser()` and `options(error = recover)` calls.
+- **Status Bar Indicator**:
+  - **Clean**: Shows a customizable indicator (default: green "B") when no debuggers are found.
+  - **Warning**: Turns red/warning color and shows the detected debugger type (e.g., `$(bug) browser()`) when found.
+- **Smart Detection**: Ignores debugger calls that are commented out (lines starting with `#`).
+- **Quick Navigation**: Click the status bar warning to jump directly to the first detected debugger call.
+
+## Configuration
+
+You can customize the appearance of the status bar item when no debuggers are detected:
+
+- `rDebuggerWatcher.cleanStateText`: The text or icon to display (default: "B"). You can use VS Code icons like `$(check)`.
+- `rDebuggerWatcher.cleanStateColor`: The color of the text/icon (default: "#55ff55").
+
+## Requirements
+
+- VS Code
+- An R file open in the editor
+
 
 ## Installation
 
