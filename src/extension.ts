@@ -62,8 +62,7 @@ function updateStatusBar() {
 
     if (foundMatch) {
         // 3. Highlight the type of interactive debugger call
-        myStatusBarItem.text = `$(bug) ${foundMatch.label} detected`;
-        myStatusBarItem.tooltip = "Click to jump to the debugger call";
+                                    myStatusBarItem.text = `$(bug) ${foundMatch.label}`;        myStatusBarItem.tooltip = "Click to jump to the debugger call";
         myStatusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
         myStatusBarItem.color = undefined; // Reset text color to default (usually white on warning bg)
         myStatusBarItem.command = 'rDebuggerWatcher.jumpToDebugger';
